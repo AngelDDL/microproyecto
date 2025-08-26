@@ -1,0 +1,18 @@
+config:
+  # Apuntamos al balanceador de carga
+  target: "http://192.168.56.20"
+  phases:
+    # Fase 1: Rampa de calentamiento gradual
+    - duration: 60
+      arrivalRate: 5
+      name: "Calentamiento"
+    # Fase 2: Carga sostenida
+    - duration: 120
+      arrivalRate: 20
+      name: "Carga Sostenida"
+
+scenarios:
+  - name: "Visitar la pagina principal"
+    flow:
+      - get:
+          url: "/"

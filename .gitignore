@@ -1,0 +1,12 @@
+# Vagrant-specific ignores
+.vagrant/
+
+# Log files
+*.log
+
+# Dependency directories
+node_modules/
+
+# OS-specific ignores
+.DS_Store
+Thumbs.db

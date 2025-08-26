@@ -35,6 +35,14 @@ Vagrant.configure("2") do |config|
     web2.vm.provision "shell", path: "scripts/consul_setup.sh", args: ["client", "192.168.56.12"]
   end
 
+  # 4. Nodo Web 3
+  config.vm.define "web-3" do |web3|
+    web3.vm.hostname = "web-3"
+    web3.vm.network "private_network", ip: "192.168.56.13"
+    web3.vm.provision "shell", path: "scripts/node_setup.sh"
+    web3.vm.provision "shell", path: "scripts/consul_setup.sh", args: ["client", "192.168.56.13"]
+  end
+
   # 4. Nodo Balanceador de Carga (HAProxy)
   config.vm.define "lb-1" do |lb|
     lb.vm.hostname = "lb-1"

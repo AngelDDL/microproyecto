@@ -21,14 +21,11 @@ defaults
 frontend http_front
    bind *:80
 
-   # ACL para desviar el trafico de /stats
    acl path_stats path_beg /stats
    use_backend stats_backend if path_stats
 
-   # Backend por defecto para todo el resto del trafico
    default_backend app_backend
 
-# Backend para la aplicacion web
 backend app_backend
    balance roundrobin
    # La magia de Consul Template sucede aqui
@@ -36,7 +33,6 @@ backend app_backend
    server {{.Node}} {{.Address}}:{{.Port}} check
    {{end}}
 
-# Backend para las estadisticas
 backend stats_backend
    stats enable
    stats uri /stats
